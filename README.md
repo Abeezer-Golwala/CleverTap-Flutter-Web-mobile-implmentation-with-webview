@@ -22,6 +22,6 @@ Following are the step to implement web sdk inside flutter and to pass event dat
 ### 4. Inside your web/app.js file copy and paste code from the following file :-<br/>
 https://github.com/Abeezer-Golwala/clevertap_flutter_webview_bridge_master/blob/flutterweb/web/app.js<br/>
 ### Refer to this file for Passing data from dart to js <br/>
-https://github.com/Abeezer-Golwala/CleverTap-Web-mobile-implmentation-with-webvoiew/blob/flutterweb/lib/main.dart
+https://github.com/Abeezer-Golwala/CleverTap-Web-mobile-implmentation-with-webvoiew/blob/flutterweb/lib/main.dart<br/>
 Refer to this link for more details on Clevertaps Web SDK :-<br/>
 https://developer.clevertap.com/docs/web-quickstart-guide
