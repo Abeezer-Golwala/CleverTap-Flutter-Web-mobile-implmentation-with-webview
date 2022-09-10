@@ -8,7 +8,7 @@ Following are the step to implement web sdk inside flutter and to pass event dat
        import 'package:universal_html/html.dart' as html;<br/>
        import 'dart:convert';
 
-### 3. Pass your json payload as follows<br/>
+### 3. Pass your data json payload as follows<br/>
   #### OnUserLogin Code<br/>
     html.window.postMessage(jsonEncoder.convert({"Type": "onuserlogin","Payload": {'Name': 'Abctest','Identity': '9789','Email': 'hello2@react.com','MSG-push': true,'MSG-email': true,'MSG-sms': true,'MSG-whatsapp': true}}), "*");
 
@@ -19,8 +19,9 @@ Following are the step to implement web sdk inside flutter and to pass event dat
 #### Push Event<br/>
     html.window.postMessage(jsonEncoder.convert({"Type": "event","EventName": 'Product Viewed',"Payload": {'Product Name': 'Dairy Milk','Category': 'Chocolate','Amount': 20.00}}), "*");
 
-### 4. Inside your web/app.js file copy and paste code from the following file :-
-https://github.com/Abeezer-Golwala/clevertap_flutter_webview_bridge_master/blob/flutterweb/web/app.js
-
-Refer to for this link for more details on Clevertaps Web SDK :-<br/>
+### 4. Inside your web/app.js file copy and paste code from the following file :-<br/>
+https://github.com/Abeezer-Golwala/clevertap_flutter_webview_bridge_master/blob/flutterweb/web/app.js<br/>
+### Refer to this file for Passing data from dart to js <br/>
+https://github.com/Abeezer-Golwala/CleverTap-Web-mobile-implmentation-with-webvoiew/blob/flutterweb/lib/main.dart
+Refer to this link for more details on Clevertaps Web SDK :-<br/>
 https://developer.clevertap.com/docs/web-quickstart-guide
