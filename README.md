@@ -1,16 +1,26 @@
-# untitled
+# Implmenting Flutter Web with clevertap
 
-A new Flutter project.
+Following are the step to implement web sdk inside flutter and to pass event data from dart to js. <br/>
+### 1. Insert the following dependency in pubspec.yaml </br>
+       universal_html: ^2.0.8
+   
+### 2. Import this package inside your dart file where you wish to push data to CleverTap<br/>
+       import 'package:universal_html/html.dart' as html;<br/>
+       import 'dart:convert';
 
-## Getting Started
+### 3. Pass your json payload as follows<br/>
+  #### OnUserLogin Code<br/>
+    html.window.postMessage(jsonEncoder.convert({"Type": "onuserlogin","Payload": {'Name': 'Abctest','Identity': '9789','Email': 'hello2@react.com','MSG-push': true,'MSG-email': true,'MSG-sms': true,'MSG-whatsapp': true}}), "*");
 
-This project is a starting point for a Flutter application.
+#### Profile Push Code<br/>
 
-A few resources to get you started if this is your first Flutter project:
+    html.window.postMessage(jsonEncoder.convert({"Type": "profilepush","Payload": {'Gender': 'M','test': 'hell123o','test2': ["hello2", "helloe3"]}}), "*");
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+#### Push Event<br/>
+    html.window.postMessage(jsonEncoder.convert({"Type": "event","EventName": 'Product Viewed',"Payload": {'Product Name': 'Dairy Milk','Category': 'Chocolate','Amount': 20.00}}), "*");
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### 4. Inside your web/app.js file copy and paste code from the following file :-
+https://github.com/Abeezer-Golwala/clevertap_flutter_webview_bridge_master/blob/flutterweb/web/app.js
+
+Refer to for this link for more details on Clevertaps Web SDK :-<br/>
+https://developer.clevertap.com/docs/web-quickstart-guide
