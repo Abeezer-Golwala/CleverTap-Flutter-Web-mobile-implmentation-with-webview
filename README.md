@@ -5,7 +5,7 @@ Following are the step to implement web sdk inside flutter and to pass event dat
        universal_html: ^2.0.8
    
 ### 2. Import this package inside your dart file where you wish to push data to CleverTap<br/>
-       import 'package:universal_html/html.dart' as html;<br/>
+       import 'package:universal_html/html.dart' as html;
        import 'dart:convert';
 
 ### 3. Pass your data json payload as follows<br/>
