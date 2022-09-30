@@ -1,5 +1,6 @@
 {
     "name": "clevertap_flutter_webview_bridge_master",
+    "gcm_sender_id": "540192587568",
     "short_name": "clevertap_flutter_webview_bridge_master",
     "start_url": ".",
     "display": "standalone",
