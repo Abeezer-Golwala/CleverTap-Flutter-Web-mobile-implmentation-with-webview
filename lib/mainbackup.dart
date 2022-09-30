@@ -72,7 +72,6 @@ class _MyHomePageState extends State<MyHomePage> {
     _clevertapPlugin = new CleverTapPlugin();
     _clevertapPlugin.setCleverTapInAppNotificationButtonClickedHandler(inAppNotificationButtonClicked);
     _clevertapPlugin.setCleverTapPushClickedPayloadReceivedHandler(pushClickedPayloadReceived);
-    _clevertapPlugin.setCleverTapDisplayUnitsLoadedHandler(onDisplayUnitsLoaded);
   }
   //For Push Notification Clicked Payload in FG and BG state
   void pushClickedPayloadReceived(Map<String, dynamic> map) {
@@ -82,15 +81,29 @@ class _MyHomePageState extends State<MyHomePage> {
       debugPrint("on Push Click Payload = $data");
     });
   }
-  var test;
   String textHolder = 'Old Sample Text...!!!';
-
-  void onDisplayUnitsLoaded(List<dynamic>? displayUnits) {
-    this.setState(() async {
-      List? displayUnits = await CleverTapPlugin.getAllDisplayUnits();
-      print("Display Units = " + displayUnits.toString());
-    });
-  }
+  // Future<void> changeText() async {
+  //   var temp= {"":""};
+  //   CleverTapPlugin.recordEvent("abeezernativedisp", temp);
+  //   setState(() async {
+  //     //  List <dynamic> displayUnits = await CleverTapPlugin.getAllDisplayUnits();
+  //     //    textHolder = "Display Units = "+displayUnits.toString();
+  //     print("abezer test");
+  //     List <dynamic> myJSON = await CleverTapPlugin.getAllDisplayUnits();
+  //     print("abezer "+myJSON.toString());
+  //
+  //     // String nameString = jsonEncode(nameJson); // jsonEncode != .toString()
+  //
+  //     // String jsonTags = jsonEncode(displayUnits);
+  //     // var decodedJson = json.decode(jsonTags);
+  //     // var jsonValue= json.decode(decodedJson['value']);
+  //     //   print("Display Units = " + displayUnits.toString());
+  //     //displayUnits.toString();
+  //   });
+  //   setState(() {
+  //     textHolder = "Display Units";
+  //   });
+  // }
   void _handleURLButtonPress(BuildContext context, String url, String title) {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => WebViewPage(url, title)));
@@ -157,39 +170,39 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            // Card(
-            //   color: Colors.grey.shade300,
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(4.0),
-            //     child: ListTile(
-            //       title: Text("OnUserLogin Web"),
-            //       subtitle: Text("OnUserLogin Web"),
-            //       onTap: onUserLoginWeb,
-            //     ),
-            //   ),
-            // ),
-            // Card(
-            //   color: Colors.grey.shade300,
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(4.0),
-            //     child: ListTile(
-            //       title: Text("PushProfile Web"),
-            //       subtitle: Text("PushProfile Web"),
-            //       onTap: pushProfileWeb,
-            //     ),
-            //   ),
-            // ),
-            // Card(
-            //   color: Colors.grey.shade300,
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(4.0),
-            //     child: ListTile(
-            //       title: Text("Push Event Web"),
-            //       subtitle: Text("Push Event Web"),
-            //       onTap: pushEventWeb,
-            //     ),
-            //   ),
-            // ),
+            Card(
+              color: Colors.grey.shade300,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: ListTile(
+                  title: Text("OnUserLogin Web"),
+                  subtitle: Text("OnUserLogin Web"),
+                  onTap: onUserLoginWeb,
+                ),
+              ),
+            ),
+            Card(
+              color: Colors.grey.shade300,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: ListTile(
+                  title: Text("PushProfile Web"),
+                  subtitle: Text("PushProfile Web"),
+                  onTap: pushProfileWeb,
+                ),
+              ),
+            ),
+            Card(
+              color: Colors.grey.shade300,
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: ListTile(
+                  title: Text("Push Event Web"),
+                  subtitle: Text("Push Event Web"),
+                  onTap: pushEventWeb,
+                ),
+              ),
+            ),
             Container(
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 child: Text('$textHolder',
@@ -197,7 +210,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
             ),
             ElevatedButton(
-              onPressed: () => inapp(),
+              onPressed: () => opappinbox(),
               child: Text('Click Here To Change Text Widget Text Dynamically'),
             ),
             MaterialButton(
@@ -312,15 +325,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void inapp()  {
     var temp= {"":""};
-    CleverTapPlugin.recordEvent("abeezerinapnotif",temp);
+    // CleverTapPlugin.recordEvent("abeezerinapnotif",temp);
+
     String ctid =  getCleverTapId();
     print("hellot"+getCleverTapId());
     AdjustEvent adjustEvent = new AdjustEvent('yuwytb');
     adjustEvent.addPartnerParameter('clevertapId',ctid );
     Adjust.trackEvent(adjustEvent);
-    // CleverTapPlugin.recordEvent("abeezerinapnotif",temp);
+    CleverTapPlugin.recordEvent("abeezerinapnotif",temp);
   }
-
+  // void inAppNotificationButtonClicked(Map<String, dynamic>? map) {
   void inAppNotificationButtonClicked(data) {
     this.setState(() {
       print("inAppNotificationButtonClicked called = ${data.toString()}");

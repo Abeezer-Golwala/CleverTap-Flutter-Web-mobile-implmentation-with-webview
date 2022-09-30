@@ -11,6 +11,7 @@ clevertap.privacy.push({useIP: false}); //set the flag to true, if the user agre
          var s = document.getElementsByTagName('script')[0];
          s.parentNode.insertBefore(wzrk, s);
   })();
+
 function recieveMessage(event) {
   var message = JSON.parse(event.data);
   console.log(event.data)

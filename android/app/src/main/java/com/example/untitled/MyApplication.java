@@ -16,7 +16,8 @@ public class MyApplication extends FlutterApplication implements CTPushNotificat
         ActivityLifecycleCallback.register(this);
         super.onCreate();
         CleverTapAPI cleverTapAPI = CleverTapAPI.getDefaultInstance(getApplicationContext());
-        cleverTapAPI.setCTPushNotificationListener(this::onNotificationClickedPayloadReceived);
+        cleverTapAPI.setCTPushNotificationListener(this);
+//        Log.d("payload","Tets");
     }
 
     @Override
