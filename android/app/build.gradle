@@ -27,7 +27,7 @@ apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -37,7 +37,7 @@ android {
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.untitled"
-        minSdkVersion flutter.minSdkVersion
+//        minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -60,7 +60,8 @@ dependencies
 {
     implementation platform('com.google.firebase:firebase-bom:29.0.4')
     implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.clevertap.android:clevertap-android-sdk:4.6.0'
+    implementation 'com.clevertap.android:clevertap-android-sdk:4.7.4'
+    implementation 'com.clevertap.android:push-templates:1.0.7'
     implementation 'com.android.support:support-v4:28.0.0'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'//Mandatory for using FCM push notifications, skip if not using FCM
     implementation 'com.android.support:appcompat-v7:28.0.0'//MANDATORY for App Inbox

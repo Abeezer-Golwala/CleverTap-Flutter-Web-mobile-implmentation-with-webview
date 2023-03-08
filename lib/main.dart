@@ -15,6 +15,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 //import this for using
 import 'package:universal_html/html.dart' as html;
+
 final jsonEncoder = JsonEncoder();
 
 void main() {
@@ -27,7 +28,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -45,14 +45,17 @@ class MyHomePage extends StatefulWidget {
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
+
 class _MyHomePageState extends State<MyHomePage> {
   late CleverTapPlugin _clevertapPlugin;
   @override
   void initState() {
-    AdjustConfig config = AdjustConfig('lysplpl4f75s', AdjustEnvironment.sandbox);
+    AdjustConfig config =
+        AdjustConfig('lysplpl4f75s', AdjustEnvironment.sandbox);
     config.logLevel = AdjustLogLevel.verbose;
     Adjust.start(config);
-    CleverTapPlugin.createNotificationChannel("abtest", "abtest", "Flutter Test", 5, true);
+    CleverTapPlugin.createNotificationChannel(
+        "abtest", "abtest", "Flutter Test", 5, true);
     super.initState();
     CleverTapPlugin.initializeInbox();
     CleverTapPlugin.setDebugLevel(3);
@@ -60,20 +63,27 @@ class _MyHomePageState extends State<MyHomePage> {
     initPlatformState();
     // tokenfb();
   }
+
   Future<void> initPlatformState() async {
     if (!mounted) return;
   }
+
   Future<void> tokenfb() async {
     String? token = await FirebaseMessaging.instance.getToken();
     // CleverTapPlugin.(token, true);
     CleverTapPlugin.setPushToken(token.toString());
   }
+
   void activateCleverTapFlutterPluginHandlers() {
     _clevertapPlugin = new CleverTapPlugin();
-    _clevertapPlugin.setCleverTapInAppNotificationButtonClickedHandler(inAppNotificationButtonClicked);
-    _clevertapPlugin.setCleverTapPushClickedPayloadReceivedHandler(pushClickedPayloadReceived);
-    _clevertapPlugin.setCleverTapDisplayUnitsLoadedHandler(onDisplayUnitsLoaded);
+    _clevertapPlugin.setCleverTapInAppNotificationButtonClickedHandler(
+        inAppNotificationButtonClicked);
+    _clevertapPlugin.setCleverTapPushClickedPayloadReceivedHandler(
+        pushClickedPayloadReceived);
+    _clevertapPlugin
+        .setCleverTapDisplayUnitsLoadedHandler(onDisplayUnitsLoaded);
   }
+
   //For Push Notification Clicked Payload in FG and BG state
   void pushClickedPayloadReceived(Map<String, dynamic> map) {
     debugPrint("pushClickedPayloadReceived called");
@@ -82,6 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
       debugPrint("on Push Click Payload = $data");
     });
   }
+
   var test;
   String textHolder = 'Old Sample Text...!!!';
 
@@ -91,13 +102,14 @@ class _MyHomePageState extends State<MyHomePage> {
       print("Display Units = " + displayUnits.toString());
     });
   }
+
   void _handleURLButtonPress(BuildContext context, String url, String title) {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => WebViewPage(url, title)));
   }
+
   @override
   Widget build(BuildContext context) {
-
     // void onDisplayUnitsLoaded(List<dynamic> displayUnits) {
     //   this.setState(() async {
     //     List displayUnits = await CleverTapPlugin.getAllDisplayUnits();
@@ -109,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -192,10 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // ),
             Container(
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child: Text('$textHolder',
-                    style: TextStyle(fontSize: 21)
-                )
-            ),
+                child: Text('$textHolder', style: TextStyle(fontSize: 21))),
             ElevatedButton(
               onPressed: () => inapp(),
               child: Text('Click Here To Change Text Widget Text Dynamically'),
@@ -204,11 +213,14 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.blue,
               child: Text(
                 "Open WebView Flutter",
-                style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    color: Colors.white70, fontWeight: FontWeight.bold),
               ),
               onPressed: () {
                 _handleURLButtonPress(
-                    context, "http://abeezerwebtest.000webhostapp.com/testflutter.html", "Test Website");
+                    context,
+                    "http://abeezerwebtest.000webhostapp.com/testflutter.html",
+                    "Test Website");
               },
             ),
           ],
@@ -216,6 +228,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
+
   //tt
   void onUserLogin() {
     var stuff = ["bags", "shoes"];
@@ -223,28 +236,24 @@ class _MyHomePageState extends State<MyHomePage> {
       'Name': 'Abeezer',
       'Identity': '110',
       'Email': 'abeezer@ft.com',
-      'DOB':'01-01-1999',
+      'DOB': '01-01-1999',
       'stuff': stuff,
-      'MSG-push':true,
-      'MSG-whatsapp':true,
-      'MSG-sms':true,
-      'MSG-email':true
+      'MSG-push': true,
+      'MSG-whatsapp': true,
+      'MSG-sms': true,
+      'MSG-email': true
     };
     CleverTapPlugin.onUserLogin(profile);
-    //showToast("onUserLogin called, check console for details");
   }
-  void recordEvent() {
-    var eventData = {
-      'number': 1
-    };
-    CleverTapPlugin.recordEvent("AbeezerPushEvent",eventData);
-  }
-  void opappinbox(){
-    var eventData = {
-      'number': 1
-    };
-    CleverTapPlugin.recordEvent("AbeezerPushEvent",eventData);
 
+  void recordEvent() {
+    var eventData = {'number': 1};
+    CleverTapPlugin.recordEvent("AbeezerPushEvent", eventData);
+  }
+
+  void opappinbox() {
+    var eventData = {'number': 1};
+    CleverTapPlugin.recordEvent("AbeezerPushEvent", eventData);
 
     var styleConfig = {
       'noMessageTextColor': '#ff6600',
@@ -253,12 +262,13 @@ class _MyHomePageState extends State<MyHomePage> {
     };
     CleverTapPlugin.showInbox(styleConfig);
   }
+
   late String ctid;
   String getCleverTapId() {
     CleverTapPlugin.getCleverTapID().then((clevertapId) {
       if (clevertapId == null) return;
       setState((() {
-        print("hellott"+"$clevertapId");
+        print("hellott" + "$clevertapId");
         ctid = "$clevertapId";
       }));
     }).catchError((error) {
@@ -268,55 +278,69 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     return ctid;
   }
+
   void onUserLoginWeb() {
     if (kIsWeb) {
-      html.window.postMessage(jsonEncoder.convert({
-        "Type": "onuserlogin",
-        "Payload": {
-          'Name': 'Abctest',
-          'Identity': '9789',
-          'Email': 'hello2@react.com',
-          'MSG-push': true,
-          'MSG-email': true,
-          'MSG-sms': true,
-          'MSG-whatsapp': true
-        }
-      }), "*");
-    }
-  }
-  void pushProfileWeb() {
-    if (kIsWeb) {
-      html.window.postMessage(jsonEncoder.convert({
-        "Type": "profilepush",
-        "Payload": {
-          'Gender': 'M',
-          'test': 'hell123o',
-          'test2': ["hello2", "helloe3"]
-        }
-      }), "*");
-    }
-  }
-  void pushEventWeb() {
-    if (kIsWeb) {
-      html.window.postMessage(jsonEncoder.convert({
-        "Type": "event",
-        "EventName": 'Product Viewed',
-        "Payload": {
-          'Product Name': 'Dairy Milk',
-          'Category': 'Chocolate',
-          'Amount': 20.00
-        }
-      }), "*");
+      html.window.postMessage(
+          jsonEncoder.convert({
+            "Type": "onuserlogin",
+            "Payload": {
+              'Name': 'Abctest',
+              'Identity': '9789',
+              'Email': 'hello2@react.com',
+              'MSG-push': true,
+              'MSG-email': true,
+              'MSG-sms': true,
+              'MSG-whatsapp': true
+            }
+          }),
+          "*");
     }
   }
 
-  void inapp()  {
-    var temp= {"":""};
-    CleverTapPlugin.recordEvent("abeezerinapnotif",temp);
-    String ctid =  getCleverTapId();
-    print("hellot"+getCleverTapId());
+  void pushProfileWeb() {
+    if (kIsWeb) {
+      html.window.postMessage(
+          jsonEncoder.convert({
+            "Type": "profilepush",
+            "Payload": {
+              'Gender': 'M',
+              'test': 'hell123o',
+              'test2': ["hello2", "helloe3"]
+            }
+          }),
+          "*");
+    }
+  }
+
+  void pushEventWeb() {
+    if (kIsWeb) {
+      html.window.postMessage(
+          jsonEncoder.convert({
+            "Type": "event",
+            "EventName": 'Product Viewed',
+            "Payload": {
+              'Product Name': 'Dairy Milk',
+              'Category': 'Chocolate',
+              'Amount': 20.00
+            }
+          }),
+          "*");
+    }
+  }
+
+  void inapp() {
+    var temp = {"": ""};
+    CleverTapPlugin.recordEvent("abeezerinapnotif", temp);
+    // for (int i=1;i<4;i++ ) {
+    //   for (int j=7;j<10;j++ ) {
+    //     CleverTapPlugin.profileAddMultiValues("stuffnew" + i.toString(), ["bag"+j.toString()]);
+    //   }
+    // }
+    String ctid = getCleverTapId();
+    print("hellot" + getCleverTapId());
     AdjustEvent adjustEvent = new AdjustEvent('yuwytb');
-    adjustEvent.addPartnerParameter('clevertapId',ctid );
+    adjustEvent.addPartnerParameter('clevertapId', ctid);
     Adjust.trackEvent(adjustEvent);
     // CleverTapPlugin.recordEvent("abeezerinapnotif",temp);
   }
@@ -335,8 +359,7 @@ class WebViewPage extends StatefulWidget {
   WebViewPage(this.url, this.title);
 
   @override
-  WebViewPageState createState() =>
-      WebViewPageState(this.url, this.title);
+  WebViewPageState createState() => WebViewPageState(this.url, this.title);
 }
 
 class WebViewPageState extends State<WebViewPage> {
@@ -349,6 +372,7 @@ class WebViewPageState extends State<WebViewPage> {
   void initState() {
     super.initState();
   }
+
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
@@ -360,47 +384,61 @@ class WebViewPageState extends State<WebViewPage> {
         body: Column(children: [
           Expanded(
               child: WebView(
-                initialUrl: this.url,
-                javascriptMode: JavascriptMode.unrestricted,
-                javascriptChannels: {
-                  JavascriptChannel(
-                      name: 'messageHandler',
-                      onMessageReceived: (JavascriptMessage message) {
-                        print(message.message);
-                        var decodedJson = json.decode(message.message);
-                        switch(decodedJson["Type"]) {
-                          case "event": CleverTapPlugin.recordEvent(decodedJson["EventName"],decodedJson["Payload"]);
-                          break;
+            initialUrl: this.url,
+            javascriptMode: JavascriptMode.unrestricted,
+            javascriptChannels: {
+              JavascriptChannel(
+                  name: 'messageHandler',
+                  onMessageReceived: (JavascriptMessage message) {
+                    print(message.message);
+                    var decodedJson = json.decode(message.message);
+                    switch (decodedJson["Type"]) {
+                      case "event":
+                        CleverTapPlugin.recordEvent(
+                            decodedJson["EventName"], decodedJson["Payload"]);
+                        break;
 
-                          case "onuserlogin": CleverTapPlugin.onUserLogin(decodedJson["Payload"]);
-                          break;
+                      case "onuserlogin":
+                        CleverTapPlugin.onUserLogin(decodedJson["Payload"]);
+                        break;
 
-                          case "profileset": CleverTapPlugin.profileSet(decodedJson["Payload"]);
-                          break;
+                      case "profileset":
+                        CleverTapPlugin.profileSet(decodedJson["Payload"]);
+                        break;
 
-                          case "chargedevent": {
-                            CleverTapPlugin.recordChargedEvent(decodedJson["chargedetails"], List<Map<String, dynamic>>.from(decodedJson["items"]));
-                          }
-                          break;
-
-                          case "profileSetMultiValuesForKey": CleverTapPlugin.profileSetMultiValues(decodedJson["key"], decodedJson["values"]);
-                          break;
-
-                          case "profileRemoveMultiValuesForKey": CleverTapPlugin.profileRemoveMultiValues(decodedJson["key"], decodedJson["values"]);
-                          break;
-
-                          case "profileAddMultiValuesForKey": CleverTapPlugin.profileAddMultiValues(decodedJson["key"], decodedJson["values"]);
-                          break;
-
-                          default: { print("Invalid choice"); }
-                          break;
+                      case "chargedevent":
+                        {
+                          CleverTapPlugin.recordChargedEvent(
+                              decodedJson["chargedetails"],
+                              List<Map<String, dynamic>>.from(
+                                  decodedJson["items"]));
                         }
+                        break;
 
-                      })
-                },
-              )
-          )
-        ])
-    );
+                      case "profileSetMultiValuesForKey":
+                        CleverTapPlugin.profileSetMultiValues(
+                            decodedJson["key"], decodedJson["values"]);
+                        break;
+
+                      case "profileRemoveMultiValuesForKey":
+                        CleverTapPlugin.profileRemoveMultiValues(
+                            decodedJson["key"], decodedJson["values"]);
+                        break;
+
+                      case "profileAddMultiValuesForKey":
+                        CleverTapPlugin.profileAddMultiValues(
+                            decodedJson["key"], decodedJson["values"]);
+                        break;
+
+                      default:
+                        {
+                          print("Invalid choice");
+                        }
+                        break;
+                    }
+                  })
+            },
+          ))
+        ]));
   }
 }

@@ -29,7 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  clevertap_plugin: ^1.5.1
+  clevertap_plugin: ^1.6.0
   adjust_sdk: ^4.29.2
   universal_html: ^2.0.8
   # The following adds the Cupertino Icons font to your application.

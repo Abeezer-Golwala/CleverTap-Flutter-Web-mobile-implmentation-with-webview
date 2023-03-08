@@ -12,6 +12,7 @@ import clevertap_plugin
     GeneratedPluginRegistrant.register(with: self)
     CleverTap.autoIntegrate() // integrate CleverTap SDK using the autoIntegrate option
     CleverTapPlugin.sharedInstance()?.applicationDidLaunch(options: launchOptions)
+      CleverTap.setDebugLevel(3)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
